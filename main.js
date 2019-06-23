@@ -1,6 +1,8 @@
 (function(){
+    //左侧组件
+    //热门
 Vue.component('hot-lists',{
-    props:['temp1'],
+    props:['namex'],
 template:`
 <ul class="book-list">
 <li v-for='item in temp'>
@@ -30,18 +32,52 @@ template:`
 `,
 data:function(){
     return {
-        temp:this.temp1.list
+        temp:[]
     }
 },
 methods:{
+    ajaxstart:function (){
+        console.log(this.namex)
+        url = 'http://xxxx./'+this.namex
+        _temp = this
+        $.ajax({
+            type:'get',
+            url: url,
+            success: function(data){
 
+            },
+            error:function(xxx){
+                let data = {
+                    list:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
+                    {title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
+                    {title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
+                    {title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
+                    {title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
+                    {title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
+                   ]   
+                   }
+                   console.log('fail')
+                // let data = []
+                _temp.temp = data.list
+                console.log(_temp.namex)
+                // console.log()
+                // console.log(e)
+                _temp.ajaxsuccess(data)
+            },
+        });
+    },
+    ajaxsuccess:function(data){
+
+    }
 },
 created:function(){
-    console.log(this.temp1)
+    this.ajaxstart()
 }
 })
 
 //recommend
+//中间组件
+//推荐
 Vue.component('manxie-recommend',{
     props:['temp2'],
 template:`
@@ -83,6 +119,8 @@ created:function(){
 }
 })
 
+//右侧组件
+//战力榜
 Vue.component('manxie-zhanli',{
     props:['temp3'],
 template:`
@@ -142,12 +180,53 @@ created:function(){
 }
 })
 
+Vue.component('novel-section',{
+    props:['temp1','temp2','temp3','sections'],
+template:`
+<section class="novel-container row">
+<div  v-for="section in sectionss">
+<div class="block-left col-md-6 col-sm-7 col-xs-12 text-center">
+    <div class="block-title">
+        <a :href="section.url" class="title-link">
+            <div class="icon-title"></div>
+            <h2 class="title">{{section.namex}}热门文库本</h2>
+        </a>
+        <a href="https://www.zzuliacgn.com/info/#/faq?to=rank" target="_blank" class="link-faq"><i class="fa fa-question-circle fa-2x"></i></a>
+        <a href="https://www.zzuliacgn.com/c/14" class="more">更多<i class="fa fa-angle-right fa-fw"></i></a>
+    </div>
+    <div class="block-bottom">
+
+            <hot-lists :temp1='temp1' :namex=section.namex></hot-lists>
+            
+
+    </div>
+</div>
+<manxie-recommend :temp2='temp2' :namex=section.namex></manxie-recommend>
+
+<manxie-zhanli :temp3='temp3' :namex=section.namex></manxie-zhanli>
+</div>
+</section>
+`,
+data:function(){
+    return {
+        temp33:this.temp3,
+        sectionss:this.sections
+    }
+},
+methods:{
+
+},
+created:function(){
+console.log(this.sections)
+}
+})
 
 
 
 let app = new Vue({
     el:'#hot-novel',
     data:{
+        sections:[{namex:'xx',url:'xx'},{namex:'yy',url:'yy'},{namex:'zz',url:'zz'}],
         //要加东西的话
         temp1:{
          list:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
