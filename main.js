@@ -2,76 +2,70 @@
     //左侧组件
     //热门
 Vue.component('hot-lists',{
-    props:['namex'],
+    props:['section','datalist','index'],
 template:`
-<ul class="book-list">
-<li v-for='item in temp'>
-<a href="#" target="_blank" class="thumb">
-    <span class="recom"></span>
-    <img :alt="item.alt" class="cover" :src="item.src">
-    <div class="label-count">
-        <span class="fontstype">{{item.word}}</span>
+<div class="block-left col-md-6 col-sm-7 col-xs-12 text-center">
+    <div class="block-title">
+        <a :href="section.url" class="title-link">
+            <div class="icon-title"></div>
+            <h2 class="title">{{section.namex}}热门文库本</h2>
+        </a>
+        <a href="https://www.zzuliacgn.com/info/#/faq?to=rank" target="_blank" class="link-faq"><i class="fa fa-question-circle fa-2x"></i></a>
+        <a href="https://www.zzuliacgn.com/c/14" class="more">更多<i class="fa fa-angle-right fa-fw"></i></a>
     </div>
-    <div class="book-info">
-        <div class="book-info-a">
-            <p><span class="d">{{item.title}}</span></p>
-            <p><span class="book-info-title">类别：</span><span class="d">{{item.type}}</span></p>
+    <div class="block-bottom">
+    <ul class="book-list">
+    <li v-for='item in temp'>
+    <a href="#" target="_blank" class="thumb">
+        <span class="recom"></span>
+        <img :alt="item.alt" class="cover" :src="item.src">
+        <div class="label-count">
+            <span class="fontstype">{{item.word}}</span>
         </div>
-        <div class="book-info-b">
-            <p><span class="book-info-title">状态：</span><span class="d">{{item.state}}</span></p>
-            <p><span class="book-info-title">作者：</span><span class="d">{{item.author}}</span></p>
+        <div class="book-info">
+            <div class="book-info-a">
+                <p><span class="d">{{item.title}}</span></p>
+                <p><span class="book-info-title">类别：</span><span class="d">{{item.type}}</span></p>
+            </div>
+            <div class="book-info-b">
+                <p><span class="book-info-title">状态：</span><span class="d">{{item.state}}</span></p>
+                <p><span class="book-info-title">作者：</span><span class="d">{{item.author}}</span></p>
+            </div>
         </div>
+    </a>
+    <a href="https://www.iqing.com/book/34961" target="_blank" class="title">
+        <i class="icon icon-pay"></i>
+        <h3 class="hasicon has-icon">{{item.title}}</h3>
+    </a>
+    </li>
+    </ul>
     </div>
-</a>
-<a href="https://www.iqing.com/book/34961" target="_blank" class="title">
-    <i class="icon icon-pay"></i>
-    <h3 class="hasicon has-icon">{{item.title}}</h3>
-</a>
-</li>
-</ul>
+</div>
 `,
 data:function(){
     return {
-        temp:[]
+        temp:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'}]
     }
+},
+watch:{
+    datalist:{
+        handler(){
+            // this.temp = this.datalist
+            this.temp.push({title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'})
+            console.log('xxxxxxxxxxxxxxxx')
+            console.log(this.temp)
+        },
+        immediate: true,
+        deep: true
+    }
+    
 },
 methods:{
-    ajaxstart:function (){
-        console.log(this.namex)
-        url = 'http://xxxx./'+this.namex
-        _temp = this
-        $.ajax({
-            type:'get',
-            url: url,
-            success: function(data){
 
-            },
-            error:function(xxx){
-                let data = {
-                    list:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
-                    {title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
-                    {title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
-                    {title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
-                    {title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
-                    {title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
-                   ]   
-                   }
-                   console.log('fail')
-                // let data = []
-                _temp.temp = data.list
-                console.log(_temp.namex)
-                // console.log()
-                // console.log(e)
-                _temp.ajaxsuccess(data)
-            },
-        });
-    },
-    ajaxsuccess:function(data){
-
-    }
 },
 created:function(){
-    this.ajaxstart()
+console.log(this.index)
+console.log(this.datalist[this.index].hot)
 }
 })
 
@@ -79,7 +73,7 @@ created:function(){
 //中间组件
 //推荐
 Vue.component('manxie-recommend',{
-    props:['temp2'],
+    props:['datalist','index'],
 template:`
 <div class="block-center col-md-3 visible-md-block visible-lg-block text-left">
 <div class="js-block-rank rank-wrap">
@@ -108,7 +102,7 @@ template:`
 `,
 data:function(){
     return {
-        temp22:this.temp2.list
+        temp22:this.datalist[this.index].recommend
     }
 },
 methods:{
@@ -122,7 +116,7 @@ created:function(){
 //右侧组件
 //战力榜
 Vue.component('manxie-zhanli',{
-    props:['temp3'],
+    props:['datalist','index'],
 template:`
 <div class="block-right col-md-3 col-sm-5 col-xs-12 text-left">
 <div class="js-block-rank rank-wrap">
@@ -169,55 +163,160 @@ template:`
 `,
 data:function(){
     return {
-        temp33:this.temp3
+        temp33:this.datalist[this.index].zhanli
     }
 },
 methods:{
 
 },
 created:function(){
-
+console.log(this.zhanli)
 }
 })
 
+
 Vue.component('novel-section',{
-    props:['temp1','temp2','temp3','sections'],
+    props:['index','section','datalist'],
+template:`
+    <div>
+        <hot-lists :datalist = datas :index=index :section=section></hot-lists>
+        <manxie-recommend :datalist = datas :index=index :section=section></manxie-recommend>
+        <manxie-zhanli :datalist = datas :index=index :section=section></manxie-zhanli>
+    </div>
+`,
+data:function(){
+    return {
+        namex:this.section.namex,
+        // datas:this.datalist[this.index]
+        datas:[{hot:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'}],
+        recommend:[{title:'刀剑神域',href:'https://www.iqing.com/book/59609',src:'./次元圣经 郑州轻工大学 动漫协会！_files/5b9c39b1-3485-4cb2-b7e7-fb7ce1f88df5.jpg',num:'322.5',profile:'虽然是游戏，但可不是闹着玩的！'}],
+        zhanli:{list1:[{title:'精灵幻想记',href:'https://www.zzuliacgn.com/book/34962',alt:'轻小说：精灵幻想记',src:'./次元圣经 郑州轻工大学 动漫协会！_files/680ed4d9-0568-4113-944d-95ab025ae17e.jpg',author:'HJ文库',zhanli:'291.4'}],
+        list2:[{title:'异世界料理道',href:'https://www.zzuliacgn.com/book/38406',zhanli:'137.0'}]}
+    },
+    {hot:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'}],
+    recommend:[{title:'刀剑神域',href:'https://www.iqing.com/book/59609',src:'./次元圣经 郑州轻工大学 动漫协会！_files/5b9c39b1-3485-4cb2-b7e7-fb7ce1f88df5.jpg',num:'322.5',profile:'虽然是游戏，但可不是闹着玩的！'}],
+    zhanli:{list1:[{title:'精灵幻想记',href:'https://www.zzuliacgn.com/book/34962',alt:'轻小说：精灵幻想记',src:'./次元圣经 郑州轻工大学 动漫协会！_files/680ed4d9-0568-4113-944d-95ab025ae17e.jpg',author:'HJ文库',zhanli:'291.4'}],
+    list2:[{title:'异世界料理道',href:'https://www.zzuliacgn.com/book/38406',zhanli:'137.0'}]}
+},{hot:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'}],
+recommend:[{title:'刀剑神域',href:'https://www.iqing.com/book/59609',src:'./次元圣经 郑州轻工大学 动漫协会！_files/5b9c39b1-3485-4cb2-b7e7-fb7ce1f88df5.jpg',num:'322.5',profile:'虽然是游戏，但可不是闹着玩的！'}],
+zhanli:{list1:[{title:'精灵幻想记',href:'https://www.zzuliacgn.com/book/34962',alt:'轻小说：精灵幻想记',src:'./次元圣经 郑州轻工大学 动漫协会！_files/680ed4d9-0568-4113-944d-95ab025ae17e.jpg',author:'HJ文库',zhanli:'291.4'}],
+list2:[{title:'异世界料理道',href:'https://www.zzuliacgn.com/book/38406',zhanli:'137.0'}]}
+},]
+    }
+},
+watch:{
+    datalist:{
+        handler(){
+            this.datas = this.datalist
+            console.log('xxx111111111111')
+            console.log(this.datas)
+        },
+        immediate: true,
+        deep: true
+    }
+},
+methods:{
+
+},
+created:function(){
+    // this.ajaxstart()
+    console.log(this.index)
+    console.log(this.datas)
+}
+})
+
+//总
+Vue.component('novel-section-container',{
+    props:['sections'],
 template:`
 <section class="novel-container row">
-<div  v-for="section in sectionss">
-<div class="block-left col-md-6 col-sm-7 col-xs-12 text-center">
-    <div class="block-title">
-        <a :href="section.url" class="title-link">
-            <div class="icon-title"></div>
-            <h2 class="title">{{section.namex}}热门文库本</h2>
-        </a>
-        <a href="https://www.zzuliacgn.com/info/#/faq?to=rank" target="_blank" class="link-faq"><i class="fa fa-question-circle fa-2x"></i></a>
-        <a href="https://www.zzuliacgn.com/c/14" class="more">更多<i class="fa fa-angle-right fa-fw"></i></a>
-    </div>
-    <div class="block-bottom">
-
-            <hot-lists :temp1='temp1' :namex=section.namex></hot-lists>
-            
-
-    </div>
-</div>
-<manxie-recommend :temp2='temp2' :namex=section.namex></manxie-recommend>
-
-<manxie-zhanli :temp3='temp3' :namex=section.namex></manxie-zhanli>
-</div>
+    <novel-section  v-for="(section,index) in sectionss" :key= 'section.namex' :datalist = datalist :section=section :index=index></novel-section>
 </section>
 `,
 data:function(){
     return {
-        temp33:this.temp3,
-        sectionss:this.sections
+        sectionss:this.sections,
+        datalist:[{hot:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'}],
+        recommend:[{title:'刀剑神域',href:'https://www.iqing.com/book/59609',src:'./次元圣经 郑州轻工大学 动漫协会！_files/5b9c39b1-3485-4cb2-b7e7-fb7ce1f88df5.jpg',num:'322.5',profile:'虽然是游戏，但可不是闹着玩的！'}],
+        zhanli:{list1:[{title:'精灵幻想记',href:'https://www.zzuliacgn.com/book/34962',alt:'轻小说：精灵幻想记',src:'./次元圣经 郑州轻工大学 动漫协会！_files/680ed4d9-0568-4113-944d-95ab025ae17e.jpg',author:'HJ文库',zhanli:'291.4'}],
+        list2:[{title:'异世界料理道',href:'https://www.zzuliacgn.com/book/38406',zhanli:'137.0'}]}
+    },
+    {hot:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'}],
+    recommend:[{title:'刀剑神域',href:'https://www.iqing.com/book/59609',src:'./次元圣经 郑州轻工大学 动漫协会！_files/5b9c39b1-3485-4cb2-b7e7-fb7ce1f88df5.jpg',num:'322.5',profile:'虽然是游戏，但可不是闹着玩的！'}],
+    zhanli:{list1:[{title:'精灵幻想记',href:'https://www.zzuliacgn.com/book/34962',alt:'轻小说：精灵幻想记',src:'./次元圣经 郑州轻工大学 动漫协会！_files/680ed4d9-0568-4113-944d-95ab025ae17e.jpg',author:'HJ文库',zhanli:'291.4'}],
+    list2:[{title:'异世界料理道',href:'https://www.zzuliacgn.com/book/38406',zhanli:'137.0'}]}
+},{hot:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'}],
+recommend:[{title:'刀剑神域',href:'https://www.iqing.com/book/59609',src:'./次元圣经 郑州轻工大学 动漫协会！_files/5b9c39b1-3485-4cb2-b7e7-fb7ce1f88df5.jpg',num:'322.5',profile:'虽然是游戏，但可不是闹着玩的！'}],
+zhanli:{list1:[{title:'精灵幻想记',href:'https://www.zzuliacgn.com/book/34962',alt:'轻小说：精灵幻想记',src:'./次元圣经 郑州轻工大学 动漫协会！_files/680ed4d9-0568-4113-944d-95ab025ae17e.jpg',author:'HJ文库',zhanli:'291.4'}],
+list2:[{title:'异世界料理道',href:'https://www.zzuliacgn.com/book/38406',zhanli:'137.0'}]}
+},]
+    }
+},
+watch:{
+    datalist:{
+        handler(){
+            console.log('000000000000000000')
+            console.log(this.datalist)
+        },
+        immediate: true,
+        deep: true
     }
 },
 methods:{
-
+    ajaxstart:function (){
+        let url = 'http://xxxx./'+this.namex
+        let name=this.namex
+        let _temp = this
+        for(let i = 0;i<this.sections.length;i++){
+            axios.get('/user', {
+                params: {
+                  type: this.sections[i].namex
+                }
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+                let data = {
+                    hot:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
+                    {title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
+                    {title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
+                    {title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
+                    {title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
+                    {title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
+                   ],
+                   recommend:[{title:'刀剑神域',href:'https://www.iqing.com/book/59609',src:'./次元圣经 郑州轻工大学 动漫协会！_files/5b9c39b1-3485-4cb2-b7e7-fb7ce1f88df5.jpg',num:'322.5',profile:'虽然是游戏，但可不是闹着玩的！'},
+                   {title:'神话传说英雄的异世界奇谭',href:'https://www.iqing.com/book/70248',src:'./次元圣经 郑州轻工大学 动漫协会！_files/88d3c85c-e6cb-4af0-9afc-aa750342ae65.jpg',num:'11.6',profile:'我拿你当兄弟，你却要泡我重孙女？'},
+                   {title:'OVERLORD 不死者之王',href:'https://www.iqing.com/book/69093',src:'./次元圣经 郑州轻工大学 动漫协会！_files/9938e4ff-0c36-4c3f-bb97-804893305fd6.jpg',num:'87.2',profile:'吾乃侍奉无上至尊之人！'},
+                    {title:'Fate/Prototype 苍银的碎片',href:'https://www.iqing.com/book/35981',src:'./次元圣经 郑州轻工大学 动漫协会！_files/102fe928-efdf-4ec6-b26a-a7654f1ceb5b.jpg',num:'132.2',profile:'为了你，我愿意放弃一切！'},
+                    ],
+                    zhanli:{
+                        list1:[{title:'精灵幻想记',href:'https://www.zzuliacgn.com/book/34962',alt:'轻小说：精灵幻想记',src:'./次元圣经 郑州轻工大学 动漫协会！_files/680ed4d9-0568-4113-944d-95ab025ae17e.jpg',author:'HJ文库',zhanli:'291.4'},
+                        {title:'百炼霸王与圣约女武神',href:'https://www.zzuliacgn.com/book/34925',alt:'轻小说：百炼霸王与圣约女武神',src:'./次元圣经 郑州轻工大学 动漫协会！_files/e69f9980-88a5-4395-bb95-587af47477cc.jpg',author:'HJ文库',zhanli:'252.8'},
+                        {title:'带着智能手机闯荡异世界',href:'https://www.zzuliacgn.com/book/39311',alt:'轻小说：带着智能手机闯荡异世界',src:'./次元圣经 郑州轻工大学 动漫协会！_files/f5f65df2-4791-4fb4-9b4d-1afbb9bd4daf.jpg',author:'HJ文库',zhanli:'907.9'}
+                    ],
+                        list2:[{title:'异世界料理道',href:'https://www.zzuliacgn.com/book/38406',zhanli:'137.0'},
+                        {title:'战斗面包师与机械看板娘',href:'https://www.zzuliacgn.com/book/39673',zhanli:'31.1'},
+                        {title:'刀剑神域',href:'https://www.zzuliacgn.com/book/59609',zhanli:'87.2'},
+                        {title:'如果有妹妹就好了。',href:'https://www.zzuliacgn.com/book/54730',zhanli:'141.4'},
+                        {title:'OVERLORD 不死者之王',href:'https://www.zzuliacgn.com/book/69093',zhanli:'43.2'},
+                        {title:'为了女儿，我说不定连魔王都能干掉。',href:'https://www.zzuliacgn.com/book/57141',zhanli:'50.6'}]
+                    }
+                      
+                   }
+                   console.log(i)
+                   console.log(_temp.sections[i].namex)
+                   let namex = _temp.sections[i].namex
+                   _temp.datalist[i] = data
+                   console.log(_temp.datalist)
+              });
+        }
+    },
 },
 created:function(){
-console.log(this.sections)
+    this.ajaxstart()
+console.log(this.datalist)
 }
 })
 
