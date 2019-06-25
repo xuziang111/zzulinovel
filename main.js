@@ -1,4 +1,42 @@
 (function(){
+    //请求获取分类时，返回[{name:'xx',url:'xx'},{name:'yy',url:'yy'},{name:'zz',url:'zz'}]
+    //name为该模块的名称，会显示在模块左侧部份上方XX热门文库本，url为前往该模块的链接
+
+    //热门文库本部分 title:小说标题,href:小说页面链接,alt:小说图片说明,src:小说图片链接,type:分类,word:字数,state:连载状态
+    // hot:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
+    //  {title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
+    // ]
+
+    //满血推荐部分
+    // title:小说标题,href:小说页面链接,src:小说图片链接,profile:简介
+    // recommend:[{title:'刀剑神域',href:'https://www.iqing.com/book/59609',src:'./次元圣经 郑州轻工大学 动漫协会！_files/5b9c39b1-3485-4cb2-b7e7-fb7ce1f88df5.jpg',num:'322.5',profile:'虽然是游戏，但可不是闹着玩的！'},
+    // {title:'神话传说英雄的异世界奇谭',href:'https://www.iqing.com/book/70248',src:'./次元圣经 郑州轻工大学 动漫协会！_files/88d3c85c-e6cb-4af0-9afc-aa750342ae65.jpg',num:'11.6',profile:'我拿你当兄弟，你却要泡我重孙女？'},
+    //{title:'OVERLORD 不死者之王',href:'https://www.iqing.com/book/69093',src:'./次元圣经 郑州轻工大学 动漫协会！_files/9938e4ff-0c36-4c3f-bb97-804893305fd6.jpg',num:'87.2',profile:'吾乃侍奉无上至尊之人！'},
+    //{title:'Fate/Prototype 苍银的碎片',href:'https://www.iqing.com/book/35981',src:'./次元圣经 郑州轻工大学 动漫协会！_files/102fe928-efdf-4ec6-b26a-a7654f1ceb5b.jpg',num:'132.2',profile:'为了你，我愿意放弃一切！'},
+    //]
+
+    //战力分两部分
+    //list1中title:小说标题,href:小说页面链接,src:小说图片链接，alt:图片简介,author:作者/文库,zhanli:战力
+    //list2中title:小说标题,href:小说页面链接,zhanli:战力
+    // zhanli:{
+    //     list1:[{title:'精灵幻想记',href:'https://www.zzuliacgn.com/book/34962',alt:'轻小说：精灵幻想记',src:'./次元圣经 郑州轻工大学 动漫协会！_files/680ed4d9-0568-4113-944d-95ab025ae17e.jpg',author:'HJ文库',zhanli:'291.4'},
+    //     {title:'百炼霸王与圣约女武神',href:'https://www.zzuliacgn.com/book/34925',alt:'轻小说：百炼霸王与圣约女武神',src:'./次元圣经 郑州轻工大学 动漫协会！_files/e69f9980-88a5-4395-bb95-587af47477cc.jpg',author:'HJ文库',zhanli:'252.8'},
+    //     {title:'带着智能手机闯荡异世界',href:'https://www.zzuliacgn.com/book/39311',alt:'轻小说：带着智能手机闯荡异世界',src:'./次元圣经 郑州轻工大学 动漫协会！_files/f5f65df2-4791-4fb4-9b4d-1afbb9bd4daf.jpg',author:'HJ文库',zhanli:'907.9'}
+    // ],
+    //     list2:[{title:'异世界料理道',href:'https://www.zzuliacgn.com/book/38406',zhanli:'137.0'},
+    //     {title:'战斗面包师与机械看板娘',href:'https://www.zzuliacgn.com/book/39673',zhanli:'31.1'},
+    //     {title:'刀剑神域',href:'https://www.zzuliacgn.com/book/59609',zhanli:'87.2'},
+    //     {title:'如果有妹妹就好了。',href:'https://www.zzuliacgn.com/book/54730',zhanli:'141.4'},
+    //     {title:'OVERLORD 不死者之王',href:'https://www.zzuliacgn.com/book/69093',zhanli:'43.2'},
+    //     {title:'为了女儿，我说不定连魔王都能干掉。',href:'https://www.zzuliacgn.com/book/57141',zhanli:'50.6'}]
+    // }
+    //懒加载组件
+    Vue.use(VueLazyload, {
+        preLoad: 1.3,
+        error: '/error.png',
+        loading: '/loading.gif',
+        attempt: 1
+      })
     //左侧组件
     //热门
 Vue.component('hot-lists',{
@@ -8,7 +46,7 @@ template:`
     <div class="block-title">
         <a :href="section.url" class="title-link">
             <div class="icon-title"></div>
-            <h2 class="title">{{section.namex}}热门文库本</h2>
+            <h2 class="title">{{section.name}}热门文库本</h2>
         </a>
         <a href="https://www.zzuliacgn.com/info/#/faq?to=rank" target="_blank" class="link-faq"><i class="fa fa-question-circle fa-2x"></i></a>
         <a href="https://www.zzuliacgn.com/c/14" class="more">更多<i class="fa fa-angle-right fa-fw"></i></a>
@@ -18,7 +56,7 @@ template:`
     <li v-for='item in temp'>
     <a href="#" target="_blank" class="thumb">
         <span class="recom"></span>
-        <img :alt="item.alt" class="cover" :src="item.src">
+        <img :alt="item.alt" class="cover" v-lazy="item.src">
         <div class="label-count">
             <span class="fontstype">{{item.word}}</span>
         </div>
@@ -79,7 +117,7 @@ template:`
     <ol id="list-14" class="rank-list">
         <li class="recom-new" v-for='item22 in temp22'>
             <a :href="item22.href" target="_blank" :title=item22.title class="thumb">
-                <img data-sizes="72px" class="cover" sizes="72px" :src="item22.src">
+                <img data-sizes="72px" class="cover" sizes="72px" v-lazy="item22.src">
                 <div class="label-count">
                     <span>{{item22.num}}万</span>
                 </div>
@@ -138,7 +176,7 @@ template:`
 
         <li v-for="(item33,index) in temp33.list1">
             <a :href="item33.href" target="_blank" :title="item33.title" class="thumb">
-                <img data-sizes="51px" :alt="item33.title" class="cover"  :src="item33.src">
+                <img data-sizes="51px" :alt="item33.title" class="cover"  v-lazy="item33.src">
                 <span class="order"><span class="no">{{index+1}}</span></span>
             </a>
             <div class="book-info">
@@ -201,8 +239,7 @@ template:`
 `,
 data:function(){
     return {
-        namex:this.section.namex,
-        // datas:this.datalist[this.index]
+        name:this.section.name,
         datas:this.datalist
     }
 },
@@ -219,7 +256,7 @@ let xxx = Vue.component('novel-section-container',{
     props:['sections'],
 template:`
 <section class="novel-container row">
-    <novel-section  v-for="(section,index) in sectionss" :key= 'section.namex' :datalist = datalist :section=section :index=index></novel-section>
+    <novel-section  v-for="(section,index) in sectionss" :key= 'section.name' :datalist = datalist :section=section :index=index></novel-section>
 </section>
 `,
 data:function(){
@@ -229,16 +266,7 @@ data:function(){
         recommend:[{title:'刀剑神域',href:'https://www.iqing.com/book/59609',src:'./次元圣经 郑州轻工大学 动漫协会！_files/5b9c39b1-3485-4cb2-b7e7-fb7ce1f88df5.jpg',num:'322.5',profile:'虽然是游戏，但可不是闹着玩的！'}],
         zhanli:{list1:[{title:'精灵幻想记',href:'https://www.zzuliacgn.com/book/34962',alt:'轻小说：精灵幻想记',src:'./次元圣经 郑州轻工大学 动漫协会！_files/680ed4d9-0568-4113-944d-95ab025ae17e.jpg',author:'HJ文库',zhanli:'291.4'}],
         list2:[{title:'异世界料理道',href:'https://www.zzuliacgn.com/book/38406',zhanli:'137.0'}]}
-    },
-    {hot:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'}],
-    recommend:[{title:'刀剑神域',href:'https://www.iqing.com/book/59609',src:'./次元圣经 郑州轻工大学 动漫协会！_files/5b9c39b1-3485-4cb2-b7e7-fb7ce1f88df5.jpg',num:'322.5',profile:'虽然是游戏，但可不是闹着玩的！'}],
-    zhanli:{list1:[{title:'精灵幻想记',href:'https://www.zzuliacgn.com/book/34962',alt:'轻小说：精灵幻想记',src:'./次元圣经 郑州轻工大学 动漫协会！_files/680ed4d9-0568-4113-944d-95ab025ae17e.jpg',author:'HJ文库',zhanli:'291.4'}],
-    list2:[{title:'异世界料理道',href:'https://www.zzuliacgn.com/book/38406',zhanli:'137.0'}]}
-},{hot:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'}],
-recommend:[{title:'刀剑神域',href:'https://www.iqing.com/book/59609',src:'./次元圣经 郑州轻工大学 动漫协会！_files/5b9c39b1-3485-4cb2-b7e7-fb7ce1f88df5.jpg',num:'322.5',profile:'虽然是游戏，但可不是闹着玩的！'}],
-zhanli:{list1:[{title:'精灵幻想记',href:'https://www.zzuliacgn.com/book/34962',alt:'轻小说：精灵幻想记',src:'./次元圣经 郑州轻工大学 动漫协会！_files/680ed4d9-0568-4113-944d-95ab025ae17e.jpg',author:'HJ文库',zhanli:'291.4'}],
-list2:[{title:'异世界料理道',href:'https://www.zzuliacgn.com/book/38406',zhanli:'137.0'}]}
-},]
+    }]
     }
 },
 watch:{
@@ -249,23 +277,42 @@ watch:{
         },
         immediate: true,
         deep: true
+    },
+    sections:{ //监听sections的变化，当成功返回sections值时，执行ajaxstart
+        handler(){
+            console.log('11111111111111111111')
+            console.log(this.sections)
+            this.ajaxstart()//获取各个页面内容
+            this.sectionss = this.sections
+            // debugger
+        },
+        immediate: true,
+        deep: true
     }
 },
 methods:{
     ajaxstart:function (){
-        let url = 'http://xxxx./'+this.namex
-        let name=this.namex
+        let url = 'http://xxxx./'+this.name
         let _temp = this
+        for(let i=0;i<this.sections.length;i++){
+            this.datalist.push({hot:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'}],
+            recommend:[{title:'刀剑神域',href:'https://www.iqing.com/book/59609',src:'./次元圣经 郑州轻工大学 动漫协会！_files/5b9c39b1-3485-4cb2-b7e7-fb7ce1f88df5.jpg',num:'322.5',profile:'虽然是游戏，但可不是闹着玩的！'}],
+            zhanli:{list1:[{title:'精灵幻想记',href:'https://www.zzuliacgn.com/book/34962',alt:'轻小说：精灵幻想记',src:'./次元圣经 郑州轻工大学 动漫协会！_files/680ed4d9-0568-4113-944d-95ab025ae17e.jpg',author:'HJ文库',zhanli:'291.4'}],
+            list2:[{title:'异世界料理道',href:'https://www.zzuliacgn.com/book/38406',zhanli:'137.0'}]}
+        })
+        }
+        //获取每个分类的内容
         for(let i = 0;i<this.sections.length;i++){
-            axios.get('/user', {
+            axios.get('/user', {//获取有多少分类的路径
                 params: {
-                  type: this.sections[i].namex
+                  type: this.sections[i].name//参数为之前传来的的name
                 }
               })
               .then(function (response) {
                 console.log(response);
+                _temp.ajaxsuccess(data,i)
               })
-              .catch(function (error) {
+              .catch(function (error) {//失败时执行，现在调试用
                 console.log(error);
                 let data = {
                     hot:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'},
@@ -294,17 +341,17 @@ methods:{
                     }
                       
                    }
-                   _temp.ajaxsuccess(data,i)
+                   _temp.ajaxsuccess(data,i)//给分类赋值
               });
         }
     },
     ajaxsuccess:function(data,i){
         this.datalist[i] = data
-        Vue.set(this.datalist, i, data)
+        Vue.set(this.datalist, i, data)//不能直接等于
     }
 },
 created:function(){
-    this.ajaxstart()
+    // this.ajaxstart()
 }
 })
 
@@ -313,15 +360,34 @@ created:function(){
 let app = new Vue({
     el:'#hot-novel',
     data:{
-        sections:[{namex:'xx',url:'xx'},{namex:'yy',url:'yy'},{namex:'zz',url:'zz'}],
-
+        sections:[{name:'xx',url:'xx'}],//储存获取的分类
     },
     methods:{
-
+        getSection:function(){
+            let _temp = this
+            //获取有多少分类的函数
+            axios.get('/user', {//获取有多少分类的路径
+                params: { //get的参数，选填以?type=xxx附在url上
+                  type: 'xxx'
+                }
+              })
+              .then(function (response) {//成功时执行
+                console.log(response);
+                _temp.ajaxsuccess(response)
+              })
+              .catch(function (error) {//调试用
+                console.log(error);
+                let data = [{name:'xx',url:'xx'},{name:'yy',url:'yy'},{name:'zz',url:'zz'}]
+                   _temp.ajaxsuccess(data)
+              });
+        },
+        ajaxsuccess:function(data){
+            this.sections = data
+        }
     },
     created:function(){
-        //这里应该有一个获取数据赋值给temp1的函数
-        
+        //组件被创建时执行，请求获取分类
+        this.getSection()
     }
 })
 
