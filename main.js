@@ -44,20 +44,23 @@ template:`
 `,
 data:function(){
     return {
-        temp:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'}]
+        temp:[{title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'}],
     }
 },
 watch:{
     datalist:{
         handler(){
             // this.temp = this.datalist
-            this.temp.push({title:'我的姐姐有中二病',href:'https://www.iqing.com/book/34961',alt:'轻小说：我的姐姐有中二病',src:'http://rs.sfacg.com/web/novel/images/NovelCover/Big/2018/09/d36532df-2c23-4f5c-bebf-81fe948730fa.jpg',type:'轻小说',word:'58.1万字',state:'连载中',author:'嘎嘎'})
+            this.temp = this.datalist[this.index].hot
+            // debugger
             console.log('xxxxxxxxxxxxxxxx')
             console.log(this.temp)
+            // debugger
+            console.log(this.datalist)
         },
         immediate: true,
         deep: true
-    }
+    },
     
 },
 methods:{
@@ -210,6 +213,7 @@ watch:{
             this.datas = this.datalist
             console.log('xxx111111111111')
             console.log(this.datas)
+            // debugger
         },
         immediate: true,
         deep: true
@@ -226,7 +230,7 @@ created:function(){
 })
 
 //总
-Vue.component('novel-section-container',{
+let xxx = Vue.component('novel-section-container',{
     props:['sections'],
 template:`
 <section class="novel-container row">
@@ -257,6 +261,7 @@ watch:{
         handler(){
             console.log('000000000000000000')
             console.log(this.datalist)
+            debugger
         },
         immediate: true,
         deep: true
@@ -305,14 +310,19 @@ methods:{
                     }
                       
                    }
-                   console.log(i)
-                   console.log(_temp.sections[i].namex)
-                   let namex = _temp.sections[i].namex
-                   _temp.datalist[i] = data
-                   console.log(_temp.datalist)
+                   _temp.ajaxsuccess(data,i)
+                   debugger
               });
         }
     },
+    ajaxsuccess:function(data,i){
+        console.log(i)
+        console.log(this.sections[i].namex)
+        this.datalist[i] = data
+        Vue.set(this.datalist, i, data)
+        debugger
+        console.log(xxx.datalist)
+    }
 },
 created:function(){
     this.ajaxstart()
