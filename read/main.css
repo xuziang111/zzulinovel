@@ -21,8 +21,8 @@ main{
 }
 aside{
     position: absolute;
-    right:20px;
-    bottom:50px;
+    left:10px;
+    visibility: hidden;
 }
 aside-container{
     position: relative;
