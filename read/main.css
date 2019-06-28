@@ -11,6 +11,9 @@
     #body-container{
         max-width:970px;
     }
+    #aside-container{
+        
+    }
 }
 #body-container.container{
     border:none !important
