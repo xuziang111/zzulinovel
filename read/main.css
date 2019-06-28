@@ -1,0 +1,29 @@
+#top-left > span{
+    /* padding-left:3px; */
+}
+#book-head > #book-info{
+    display:flex;
+    justify-content: space-around;
+    /* align-items: center; */
+    margin-bottom:20px;
+}
+@media (max-width: 768px){
+    #body-container{
+        max-width:970px;
+    }
+}
+#body-container.container{
+    border:none !important
+}
+main{
+    border:1px solid #99CCFF;
+    background-color:rgba(153,204,255,0.1);
+}
+aside{
+    position: absolute;
+    right:20px;
+    bottom:50px;
+}
+aside-container{
+    position: relative;
+}
