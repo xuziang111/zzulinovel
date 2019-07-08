@@ -7,13 +7,35 @@
     /* align-items: center; */
     margin-bottom:20px;
 }
-@media (max-width: 768px){
-    #body-container{
-        max-width:970px;
+#body-container{
+    max-width:1080px;
+    /* padding:0 0px; */
+}
+#body-container.bigScreen{
+    padding:0 40px;
+}
+/* 小于768 */
+
+    #aside-container.minScreen{
+        position: absolute;
     }
+    #aside-container.minScreen #book-tool{
+        display:flex
+    }
+    #aside-container.minScreen #book-tool-container > #book-tool >div>a{
+        font-size:8px;
+        padding:3px 6px;
+    }
+
+/* 大于768 */
+
     #aside-container{
-        
+        position: fixed
     }
+    
+
+.smScreen{
+    
 }
 #body-container.container{
     border:none !important
@@ -23,10 +45,67 @@ main{
     background-color:rgba(153,204,255,0.1);
 }
 aside{
-    position: absolute;
+    /* position: absolute;
     left:10px;
-    visibility: hidden;
+    visibility: hidden; */
 }
-aside-container{
-    position: relative;
+#book-tool-container > #book-tool >div>a{
+    background:rgba(0,0,0,0);
+    border:1px solid rgba(255,255,255,0.3);
+    color:#FCAC45;
+}
+#book-content{
+    /* white-space: pre-line; */
+    text-indent:2em;
+    font-size:16px;
+}
+.setting-container{
+    display:none;
+}
+
+.setting-container.active{
+    position:fixed;
+    top:0;
+    right:0;
+    background-color:rgba(153,204,255,0.1);
+    height:100vh;
+    width:100vw;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.setting{
+    height:200px;
+    width:300px;
+    /* display:flex;
+    justify-content: center;
+    align-items: center; */
+    background-color:white;
+    border:1px solid grey;
+    border-radius:5px;
+
+}
+.setting-close{
+    cursor: pointer;
+}
+.setting-top{
+display:flex;
+height:30px;
+line-height:30px;
+justify-content: space-between;
+padding:0 5px;
+}
+.setting-font-size-container{
+    display:flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+.setting-font-size-container>span{
+    margin:0 20px;
+}
+.setting-font-size-container>div{
+    width:150px;
+}
+.btn-group >span{
+border:1px solid rgb(170,170,170);
 }

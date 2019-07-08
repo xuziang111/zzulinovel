@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="">
-    <title>(此处改为你需要的页首名)</title>
+    <title>xxx小说</title>
     <!--动漫协会官网基础样式文件,start-->
     <!--OwlCarousel2-->
     <link href="https://cdn.bootcss.com/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet">
@@ -84,7 +84,7 @@
     <div class="container-fluid">
         <!-- 移动设备显示的导航部分 -->
         <div class="navbar-header">
-            <h1>导航样式占位，用于大体预览网页效果，此处不用修改</h1>
+            <h1>导航样式占位，</h1>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
@@ -97,12 +97,11 @@
         <div class="content"><!--此处为内容块的总标题，根据需要删减修改-->
             <h1>郑州轻工业大学<strong><span class="color">动漫协会</span></strong></h1>
             <!--fa小图标使用方法百度font-awesome即可-->
-            <p class="lead">此处内容块副标题，根据自己的需要进行修改<i class="fa fa-exclamation-triangle fa-1x" aria-hidden="true"></i></p>
         </div>
         <div id="body-container" class="container">
             <!--在此处编辑你的HTML代码,详情了解Boostrap栅格系统-->
             <div class="row">
-                <div class="col-sm-11">
+                <div class="col-sm-12 col-xs-12">
                 <main>
                     <div class="text-left">
                         <div id="top-left">
@@ -119,28 +118,49 @@
                             <div><span>目录:</span><span><a href="#">目录</a></span></div>
                         </div>
                     </header>
-                    <div>
+                    <div id="book-content" class="text-left">
                             一直以来，我过着羞耻的生活。
-    
-                            咦？是谁曾经说过这样的话？
-                        
-                            是艺人？运动选手？还是因为贪污遭逮捕的政治家？
-                        
-                            算了，别计较了。
-                        
-                            我才刚升上高二，就提什么"一直以来"的，未免太夸张了。不过十四岁的我所经历过的事真是惊天动地。就像惊涛骇浪般，搞得我天翻地覆，才短短一年的时间，竟让我觉得自己的人生好像就此结束了。
                     </div>
                 </main>
-            </div>
-            <div class="col-sm-1" id="aside-container">
-                <aside id="book-tool-container">
-                    <div id="book-tool">
-                        <div class="book-tool-list"><a class="btn btn-default" href=""><span class="glyphicon glyphicon-th-list"  aria-hidden="true"></span></a></div>
-                        <div class="book-tool-pageup"><a class="btn btn-default" href=""><span class="glyphicon glyphicon-menu-left"  aria-hidden="true"></span></a></div>
-                        <div class="book-tool-down"><a class="btn btn-default" href=""><span class="glyphicon glyphicon-menu-right"  aria-hidden="true"></span></a></div>
+                <div class="" id="aside-container">
+                    <aside id="book-tool-container">
+                        <div id="book-tool">
+                            <!-- 返回章节页 -->
+                            <div class="book-tool-list"><a class="btn btn-default" href=""><span class="glyphicon glyphicon-th-list"  aria-hidden="true"></span></a></div>
+                            <!-- 上一章 -->
+                            <div class="book-tool-pageup"><a class="btn btn-default" href=""><span class="glyphicon glyphicon-menu-left"  aria-hidden="true"></span></a></div>
+                            <!-- 下一章 -->
+                            <div class="book-tool-down"><a class="btn btn-default" href=""><span class="glyphicon glyphicon-menu-right"  aria-hidden="true"></span></a></div>
+                            <!-- 设置 -->
+                            <div class="book-tool-setting"><a class="btn btn-default" href="javascript:void(0)"><span class="glyphicon glyphicon-cog"  aria-hidden="true"></span></a></div>
+                        </div>
+                    </aside>
                     </div>
-                </aside>
-                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="setting-container">
+    <div class="setting">
+        <div class="setting-top text-right">
+            <span>设置</span>
+            <span class="setting-close glyphicon glyphicon-remove"></span>
+        </div>
+        <div class="setting-main">
+            <div class="setting-font-size-container">
+                    <span>字体大小:</span>
+                    <div class="setting-font-size btn-group btn-group-justified" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                              <span type="button" class="btn size-down">-</button>
+                            </div>
+                            <div class="btn-group article-font-size" role="group">
+                              <span class="btn">16</span>
+                            </div>
+                            <div class="btn-group" role="group">
+                              <span type="button" class="btn size-up">+</button>
+                            </div>
+                    </div>
             </div>
         </div>
     </div>
@@ -173,6 +193,7 @@
 <!--*********************************************************************************************-->
 <!--此处追加你要增加的外部JS文件标签，start ↓↓↓↓↓↓↓↓↓-->
 <!--例如：<script type="text/javascript" src="JavaScript/xxx.js"></script>-->
+<script type="text/javascript" src="./JavaScript/axios.min.js"></script>
 <script type="text/javascript" src="main.js"></script>
 <!--此处追加你要增加的外部JS文件地址，end   ↑↑↑↑↑↑↑↑↑-->
 <!--*********************************************************************************************-->
